@@ -1,0 +1,6 @@
+@ProjMate_HostAddress = http://localhost:5172
+
+GET {{ProjMate_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
