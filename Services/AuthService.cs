@@ -33,7 +33,8 @@ public class AuthService : IAuthService
             Username = register.Username,
             Password = hashedPassword,
             Salt = salt,
-            DiscordId = register.DiscordId
+            DiscordId = register.DiscordId,
+            Position = register.Position,
         };
 
         await _userRepository.AddUserAsync(user);
@@ -65,7 +66,7 @@ public class AuthService : IAuthService
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim("DiscordId", user.DiscordId)
             }),
-            Expires = DateTime.UtcNow.AddDays(7),
+            Expires = DateTime.UtcNow.AddHours(1),
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature)

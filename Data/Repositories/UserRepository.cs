@@ -28,7 +28,8 @@ public class UserRepository : IUserRepository
                 Username = reader.GetString(1),
                 Password = reader.GetString(2),
                 Salt = reader.GetString(3),
-                DiscordId = reader.GetString(4)
+                DiscordId = reader.GetString(4),
+                Position = reader.GetString(5),
             };
         }
         return null;
@@ -38,7 +39,6 @@ public class UserRepository : IUserRepository
     {
         await using var connection = new NpgsqlConnection(_connectionString);
         await connection.OpenAsync();
-        
         await using var cmd = new NpgsqlCommand(
             "SELECT * FROM users WHERE username = @username",
             connection
@@ -53,7 +53,8 @@ public class UserRepository : IUserRepository
                 Username = reader.GetString(1),
                 Password = reader.GetString(2),
                 Salt = reader.GetString(3),
-                DiscordId = reader.GetString(4)
+                DiscordId = reader.GetString(4),
+                Position = reader.GetString(5),
             };
         }
         return null;
@@ -63,16 +64,16 @@ public class UserRepository : IUserRepository
     {
         await using var connection = new NpgsqlConnection(_connectionString);
         await connection.OpenAsync();
-        
         await using var cmd = new NpgsqlCommand(
-            "INSERT INTO users (username, password, salt, discordid) " +
-            "VALUES (@username, @password, @salt, @discordid)",
+            "INSERT INTO users (username, password, salt, discordid, position) " +
+            "VALUES (@username, @password, @salt, @discordid, @position)",
             connection
         );
         cmd.Parameters.AddWithValue("@username", user.Username);
         cmd.Parameters.AddWithValue("@password", user.Password);
         cmd.Parameters.AddWithValue("@salt", user.Salt);
         cmd.Parameters.AddWithValue("@discordid", user.DiscordId);
+        cmd.Parameters.AddWithValue("@position", user.Position);
         await cmd.ExecuteNonQueryAsync();
     }
 
@@ -80,13 +81,13 @@ public class UserRepository : IUserRepository
     {
         await using var connection = new NpgsqlConnection(_connectionString);
         await connection.OpenAsync();
-        
         await using var cmd = new NpgsqlCommand(
             "UPDATE users SET " +
             "username = @username, " +
             "password = @password, " +
             "salt = @salt, " +
             "discordid = @discordid " +
+            "position = @position" +
             "WHERE id = @id",
             connection
         );
@@ -95,6 +96,7 @@ public class UserRepository : IUserRepository
         cmd.Parameters.AddWithValue("@password", user.Password);
         cmd.Parameters.AddWithValue("@salt", user.Salt);
         cmd.Parameters.AddWithValue("@discordid", user.DiscordId);
+        cmd.Parameters.AddWithValue("@position", user.Position);
         await cmd.ExecuteNonQueryAsync();
     }
 
@@ -102,7 +104,6 @@ public class UserRepository : IUserRepository
     {
         await using var connection = new NpgsqlConnection(_connectionString);
         await connection.OpenAsync();
-        
         await using var cmd = new NpgsqlCommand(
             "DELETE FROM users WHERE id = @id",
             connection

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProjMate")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+354e20538650b1d3aa59cec0297a2e6af2cdc46b")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProjMate")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProjMate")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
