@@ -14,6 +14,8 @@ builder.Services.AddScoped(_ => new NpgsqlConnection(
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 // JWT 인증 서비스 등록
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
