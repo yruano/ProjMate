@@ -7,17 +7,8 @@ public class ProjectService : IProjectService
         _projectRepository = projectRepository;
     }
 
-    public async Task<Project> CreateProjectAsync(CreateProjectRequest request, string username)
+    public async Task<List<Project>> GetAllProjectsAsync()
     {
-        var project = new Project
-        {
-            Projectname = request.Projectname,
-            Username = username,
-            MaxMember = request.MaxMember,
-            Category = request.Category,
-            Text = request.Text
-        };
-
-        return await _projectRepository.AddProjectAsync(project);
+        return await _projectRepository.GetAllProjectsAsync();
     }
 }

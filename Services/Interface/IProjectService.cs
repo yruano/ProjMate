@@ -1,4 +1,4 @@
 public interface IProjectService
 {
-    Task<Project> CreateProjectAsync(CreateProjectRequest request, string username);
+    Task<List<Project>> GetAllProjectsAsync();
 }
