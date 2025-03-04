@@ -17,4 +17,11 @@ public class ProjectsController : ControllerBase
         var projects = await _projectService.GetAllProjectsAsync();
         return Ok(projects);
     }
+
+    [HttpGet("Get")]
+    public async Task<IActionResult> GetProject(string projectname)
+    {
+        var projects = await _projectService.GetProjectsAsync(projectname);
+        return Ok(projects);
+    }
 }

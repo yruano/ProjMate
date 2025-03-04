@@ -40,4 +40,23 @@ public class AuthorizeProjectsController : ControllerBase
             return BadRequest(new { message = ex.Message });
         }
     }
+
+    [HttpPost("Delete")]
+    public async Task<IActionResult> DeleteProject([FromBody] string projectname)
+    {
+        try
+        {
+            // 현재 로그인한 사용자명 추출
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
+            if (string.IsNullOrEmpty(username))
+                return Unauthorized();
+
+            var project = await _authorizeProjectService.DeleteProjectAsync(projectname, username);
+            return Ok(project);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
 }

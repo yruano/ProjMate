@@ -21,4 +21,10 @@ public class AuthorizeProjectService : IAuthorizeProjectService
         await _projectRepository.AddProjectAsync(project);
         return project;
     }
+
+    public async Task<string> DeleteProjectAsync(string projectname, string username)
+    {
+        await _projectRepository.DeleteProjectAsync(projectname, username);
+        return projectname;
+    }
 }
